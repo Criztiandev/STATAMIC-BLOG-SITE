@@ -5,37 +5,21 @@ show_recent_project="true"
 }}
 
 <section id="projects-section" class="bg-white p-4">
-    <div class="h-[500px] flex gap-8">
-        <div class="project-item relative flex-1 overflow-hidden cursor-pointer">
-            <div class="border w-full h-full rounded-md"></div>
-            <h2 class="project-title absolute bottom-4 left-4 text-lg pointer-events-none">Project Title</h2>
+    <div class="h-[500px] flex gap-4">
+        {{ collection:projects :where="slug:not_in:project" limit="3" sort="date:desc" show_future="true" }}
+        <div
+            class="project-item relative overflow-hidden cursor-pointer {{ if index == 0 }}flex-[2] order-2{{ elseif index == 1 }}flex-1 order-1{{ else }}flex-1 order-3{{ /if }}">
+            <div class="overflow-hidden w-full h-full rounded-md">
+                <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover object-center" />
+            </div>
+            <h2
+                class="project-title absolute bottom-4 left-4 text-lg pointer-events-none bg-gray-100 px-4 py-2 rounded-md">
+                {{
+                title }} - {{ date }}</h2>
         </div>
-        <div class="project-item relative flex-[2] overflow-hidden cursor-pointer">
-            <div class="border w-full h-full rounded-md"></div>
-            <h2 class="project-title absolute bottom-4 left-4 text-lg pointer-events-none">Project Title</h2>
-        </div>
-        <div class="project-item relative flex-1 overflow-hidden cursor-pointer">
-            <div class="border w-full h-full rounded-md"></div>
-            <h2 class="project-title absolute bottom-4 left-4 text-lg pointer-events-none">Project Title</h2>
-        </div>
+        {{ /collection:projects }}
     </div>
 </section>
-
-<section id="content-section" class="h-screen bg-white justify-center items-center flex flex-col gap-16">
-    <p id="content-intro"
-        class="text-[64px] leading-18 text-center font-base px-[150px] font-medium flex gap-2 flex-wrap justify-center ">
-        We help businesses to innovate and remain highly relevant to their customers by developing edge digital products
-    </p>
-
-    <div id="content-challenge" class="max-w-[500px] flex flex-col gap-4 ml-[700px] ">
-        <h2 class="challenge-heading text-2xl font-semibold flex gap-1">The Challenge</h2>
-        <p class="challenge-text flex gap-1 justify-start flex-wrap">
-            There are many variations of passages of Lorem Ipsum available,but the majority have suffered alteration</p>
-    </div>
-</section>
-
-
-<section class="w-full h-[600px] border"></section>
 
 <section id="recognition-section" class="flex flex-col gap-4 bg-white justify-center items-center h-screen">
     <span id="recognition-title" class="text-2xl">My Recognitions</span>

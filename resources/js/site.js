@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initServicesAnimation();
     initGsapAnimations();
 
-    // Initialize decrypted text effect on service lines
     initDecryptedText("[data-decrypt]", {
         speed: 48,
         maxIterations: 15,
@@ -38,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         animateOn: "both",
     });
 
-    // Initialize decrypted text for hero heading (view only)
     initDecryptedText("[data-decrypt-view]", {
         speed: 48,
         sequential: true,
@@ -47,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         animateOn: "view",
     });
 
-    // Initialize decrypted text for hero subtitle (hover only)
     initDecryptedText("[data-decrypt-hover]", {
         speed: 48,
         sequential: true,

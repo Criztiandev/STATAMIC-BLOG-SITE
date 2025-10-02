@@ -59,7 +59,7 @@ export function initProjectsAnimation() {
 
 function initProjectHoverAnimations(projectItems) {
     const projectItemsArray = Array.from(projectItems);
-    let lockedIndex = 1;
+    let lockedIndex = 0;
 
     projectItemsArray.forEach((item, currentIndex) => {
         const title = item.querySelector(".project-title");

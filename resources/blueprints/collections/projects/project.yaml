@@ -1,6 +1,7 @@
 title: Project
 tabs:
   main:
+    display: Main
     sections:
       -
         fields:
@@ -9,6 +10,19 @@ tabs:
             field:
               type: text
               required: true
+              validate:
+                - required
+          -
+            handle: thumbnail
+            field:
+              container: assets
+              type: assets
+              display: Thumbnail
+          -
+            handle: url
+            field:
+              type: text
+              display: URL
           -
             handle: content
             field:
@@ -16,20 +30,13 @@ tabs:
               display: Content
               localizable: true
           -
-            handle: author
-            field:
-              type: users
-              display: Author
-              default: current
-              localizable: true
-              max_items: 1
-          -
             handle: template
             field:
               type: template
               display: Template
               localizable: true
   sidebar:
+    display: Sidebar
     sections:
       -
         fields:
@@ -45,6 +52,8 @@ tabs:
               type: date
               required: true
               default: now
+              validate:
+                - required
           -
             handle: parent
             field:
