@@ -1,6 +1,104 @@
-{{ partial:components/section/hero-section heading="Projects" show_recent_project="false" }}
+<section>
+    {{ partial:components/section/hero-section heading="Projects" subtitle="A collection of projects I've built and contributed to" show_recent_project="false" }}
+</section>
 
-
-<div class="px-12">
-    <div class="w-[600px] h-[300px] border rounded-md"></div>
+{{ collection:projects :where="slug:not_in:projects" as="projects_list" }}
+{{ if projects_list | length > 0 }}
+<div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+    {{ projects_list limit="9" }}
+    <a href="{{ url }}" class="project-item flex flex-col gap-2 cursor-pointer group">
+        <div class="w-full h-[300px] rounded-md overflow-hidden">
+            <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover rounded-md" />
+        </div>
+        <h2 class="project-title text-xl font-semibold">{{ title }}</h2>
+        <p class="project-description text-sm text-gray-600">{{ content | truncate:150:... }}</p>
+    </a>
+    {{ /projects_list }}
 </div>
+{{ else }}
+<div class="flex justify-center items-center p-16">
+    <p class="text-2xl text-gray-400">No projects available yet. Check back soon!</p>
+</div>
+{{ /if }}
+{{ /collection:projects }}
+
+{{ collection:projects :where="slug:isnt:projects" as="all_projects" }}
+{{ if all_projects | length > 9 }}
+<div class="text-center p-4">
+    <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Load More
+    </button>
+</div>
+{{ /if }}
+{{ /collection:projects }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const projectContainer = document.getElementById('project-container');
+        let currentOffset = 9; // Already loaded 9 projects initially
+        let isLoading = false;
+
+        function createProjectItems(projects) {
+            const fragment = document.createDocumentFragment();
+
+            projects.forEach((project) => {
+                const projectLink = document.createElement('a');
+                projectLink.href = project.url;
+                projectLink.className = 'project-item flex flex-col gap-4 cursor-pointer group';
+
+                projectLink.innerHTML = `
+                <div class="w-full h-[300px] rounded-md overflow-hidden">
+                    <img src="${project.thumbnail}" alt="${project.title}" class="w-full h-full object-cover rounded-md" />
+                </div>
+                <h2 class="project-title text-xl font-semibold">${project.title}</h2>
+                <p class="project-description text-sm text-gray-600">${project.description}</p>
+            `;
+
+                fragment.appendChild(projectLink);
+            });
+
+            return fragment;
+        }
+
+        function loadMoreProjects() {
+            if (isLoading) return;
+
+            isLoading = true;
+            loadMoreBtn.textContent = 'Loading...';
+            loadMoreBtn.disabled = true;
+
+            fetch(`/api/projects/load-more?offset=${currentOffset}`)
+                .then(response => response.json())
+                .then(data => {
+                    const allProjects = data.sections.flatMap(section => section.projects);
+                    const projectItems = createProjectItems(allProjects);
+                    projectContainer.appendChild(projectItems);
+
+                    // Re-initialize animations for newly loaded projects
+                    if (window.initProjectIndexAnimation) {
+                        window.initProjectIndexAnimation();
+                    }
+
+                    currentOffset += 9;
+
+                    if (!data.hasMore) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.textContent = 'Load More';
+                        loadMoreBtn.disabled = false;
+                    }
+
+                    isLoading = false;
+                })
+                .catch(error => {
+                    console.error('Error loading projects:', error);
+                    loadMoreBtn.textContent = 'Error - Try Again';
+                    loadMoreBtn.disabled = false;
+                    isLoading = false;
+                });
+        }
+
+        loadMoreBtn.addEventListener('click', loadMoreProjects);
+    });
+</script>

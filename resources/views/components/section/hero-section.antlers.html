@@ -3,14 +3,14 @@
     <div class="flex justify-center items-center flex-col max-w-[1200px]">
         <h1 id="hero-title" class="
             text-[200px]
-            font-semibold text-center leading-52 {{ segment_1 == 'contact' ? 'text-white' : 'text-black' }}">
+            font-semibold text-center  {{ segment_1 == 'contact' ? 'text-white' : 'text-black' }}">
 
             {{ heading || 'Default Heading' }}
         </h1>
         <div class="flex flex-col">
             {{ if subtitle }}
             <p id="hero-subtitle"
-                class="text-2xl font-medium max-w-[500px] text-center {{ segment_1 == 'contact' ? 'text-gray-400' : 'text-gray-500' }}">
+                class="text-2xl font-medium max-w-[700px] text-center {{ segment_1 == 'contact' ? 'text-gray-400' : 'text-gray-500' }}">
                 {{ subtitle }}
             </p>
             {{ /if }}

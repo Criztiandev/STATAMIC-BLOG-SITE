@@ -9,6 +9,8 @@ import { initRecognitionAnimation } from "./animations/recognition-section.anima
 import { initServicesAnimation } from "./animations/services-section.animation";
 import { initAwardsAnimation } from "./animations/awards-section.animation";
 import { initDecryptedText } from "./animations/decrypted-text";
+import { initProjectIndexAnimation } from "./animations/project-index.animation";
+import { initBlogIndexAnimation } from "./animations/blog-index.animation";
 
 // Initialize Lucide icons
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,7 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
     initRecognitionAnimation();
     initServicesAnimation();
     initAwardsAnimation();
+    initProjectIndexAnimation();
+    initBlogIndexAnimation();
     initGsapAnimations();
+
+    // Expose for dynamic loading
+    window.initProjectIndexAnimation = initProjectIndexAnimation;
+    window.initBlogIndexAnimation = initBlogIndexAnimation;
 
     initDecryptedText("[data-decrypt]", {
         speed: 48,
