@@ -14,5 +14,5 @@ preview_targets:
     url: '{permalink}'
     refresh: true
 structure:
-  root: true
+  root: false
   slugs: true
