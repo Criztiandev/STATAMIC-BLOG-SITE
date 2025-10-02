@@ -7,6 +7,7 @@ import { initProjectsAnimation } from "./animations/projects-section.animation";
 import { initContentAnimation } from "./animations/content-section.animation";
 import { initRecognitionAnimation } from "./animations/recognition-section.animation";
 import { initServicesAnimation } from "./animations/services-section.animation";
+import { initDecryptedText } from "./animations/decrypted-text";
 
 // Initialize Lucide icons
 document.addEventListener("DOMContentLoaded", () => {
@@ -25,6 +26,35 @@ document.addEventListener("DOMContentLoaded", () => {
     initRecognitionAnimation();
     initServicesAnimation();
     initGsapAnimations();
+
+    // Initialize decrypted text effect on service lines
+    initDecryptedText("[data-decrypt]", {
+        speed: 48,
+        maxIterations: 15,
+        sequential: true,
+        revealDirection: "start",
+        useOriginalCharsOnly: true,
+        encryptedClass: "text-gray-400",
+        animateOn: "both",
+    });
+
+    // Initialize decrypted text for hero heading (view only)
+    initDecryptedText("[data-decrypt-view]", {
+        speed: 48,
+        sequential: true,
+        revealDirection: "start",
+        useOriginalCharsOnly: true,
+        animateOn: "view",
+    });
+
+    // Initialize decrypted text for hero subtitle (hover only)
+    initDecryptedText("[data-decrypt-hover]", {
+        speed: 48,
+        sequential: true,
+        revealDirection: "start",
+        useOriginalCharsOnly: true,
+        animateOn: "hover",
+    });
 });
 
 function initGsapAnimations() {
