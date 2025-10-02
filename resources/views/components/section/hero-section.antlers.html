@@ -2,7 +2,7 @@
     <div></div>
     <div class="flex justify-center items-center flex-col max-w-[1200px]">
         <h1 id="hero-title" class="
-            text-[200px]
+            {{ if fontSize }}text-[{{ fontSize }}]{{ else }}text-[200px]{{ /if }}
             font-semibold text-center  {{ segment_1 == 'contact' ? 'text-white' : 'text-black' }}">
 
             {{ heading || 'Default Heading' }}
