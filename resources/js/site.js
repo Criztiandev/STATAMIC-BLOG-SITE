@@ -11,6 +11,7 @@ import { initAwardsAnimation } from "./animations/awards-section.animation";
 import { initDecryptedText } from "./animations/decrypted-text";
 import { initProjectIndexAnimation } from "./animations/project-index.animation";
 import { initBlogIndexAnimation } from "./animations/blog-index.animation";
+import { initExpandingSquareAnimation } from "./animations/expanding-square.animation";
 
 // Initialize Lucide icons
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initAwardsAnimation();
     initProjectIndexAnimation();
     initBlogIndexAnimation();
+    initExpandingSquareAnimation();
     initGsapAnimations();
 
     // Expose for dynamic loading
