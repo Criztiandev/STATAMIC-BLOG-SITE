@@ -1,0 +1,30 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: full_name
+            field:
+              placeholder: 'Enter your full name'
+              type: text
+              display: 'Full Name'
+          -
+            handle: email
+            field:
+              placeholder: 'Enter your Email'
+              type: text
+              display: Email
+              always_save: false
+              validate:
+                - required
+                - null
+          -
+            handle: your_message
+            field:
+              placeholder: 'Enter your message'
+              type: textarea
+              display: 'Your Message'
+              validate:
+                - required

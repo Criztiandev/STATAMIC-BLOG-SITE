@@ -1,0 +1,96 @@
+<section>
+    {{ partial:components/section/hero-section heading="Blogs" show_recent_project="false" }}
+</section>
+
+<div id="blog-container">
+    {{ collection:blogs chunk="3" :where="slug:not_in:blogs" limit="9" }}
+    <section class="bg-white p-4 blog-section">
+        <div class="h-[500px] flex gap-8">
+            {{ chunk }}
+            <a href="{{ url }}" class="{{ if index == 1 }}flex-[2]{{ else }}flex-1{{ /if }} flex flex-col gap-2">
+                <div class="border w-full h-full rounded-md"></div>
+                <h2 class="text-lg">{{ title }}</h2>
+            </a>
+            {{ /chunk }}
+        </div>
+    </section>
+    {{ /collection:blogs }}
+</div>
+
+{{ collection:blogs :where="slug:isnt:blogs" as="all_blogs" }}
+{{ if all_blogs | length > 9 }}
+<div class="text-center p-4">
+    <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Load More
+    </button>
+</div>
+{{ /if }}
+{{ /collection:blogs }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const blogContainer = document.getElementById('blog-container');
+        let currentOffset = 9; // Already loaded 9 blogs initially
+        let isLoading = false;
+
+        function createBlogSection(blogs) {
+            const section = document.createElement('section');
+            section.className = 'bg-white p-4 blog-section';
+
+            const flexContainer = document.createElement('div');
+            flexContainer.className = 'h-[500px] flex gap-8';
+
+            blogs.forEach((blog, index) => {
+                const blogDiv = document.createElement('div');
+                blogDiv.className = index === 1 ? 'flex-[2] flex flex-col gap-2' : 'flex-1 flex flex-col gap-2';
+
+                blogDiv.innerHTML = `
+                <div class="border w-full h-full rounded-md"></div>
+                <h2 class="text-lg">${blog.title}</h2>
+            `;
+
+                flexContainer.appendChild(blogDiv);
+            });
+
+            section.appendChild(flexContainer);
+            return section;
+        }
+
+        function loadMoreBlogs() {
+            if (isLoading) return;
+
+            isLoading = true;
+            loadMoreBtn.textContent = 'Loading...';
+            loadMoreBtn.disabled = true;
+
+            fetch(`/api/blogs/load-more?offset=${currentOffset}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.sections.forEach(sectionData => {
+                        const section = createBlogSection(sectionData.blogs);
+                        blogContainer.appendChild(section);
+                    });
+
+                    currentOffset += 9;
+
+                    if (!data.hasMore) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.textContent = 'Load More';
+                        loadMoreBtn.disabled = false;
+                    }
+
+                    isLoading = false;
+                })
+                .catch(error => {
+                    console.error('Error loading blogs:', error);
+                    loadMoreBtn.textContent = 'Error - Try Again';
+                    loadMoreBtn.disabled = false;
+                    isLoading = false;
+                });
+        }
+
+        loadMoreBtn.addEventListener('click', loadMoreBlogs);
+    });
+</script>

@@ -1,0 +1,28 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: whats_your_name
+            field:
+              character_limit: 255
+              antlers: true
+              type: text
+              display: "What's your name"
+              validate:
+                - required
+          -
+            handle: your_email
+            field:
+              input_type: email
+              character_limit: 255
+              antlers: true
+              type: text
+              display: 'Your Email'
+          -
+            handle: tell_us_about_your_project
+            field:
+              type: text
+              display: 'Tell us about your project'

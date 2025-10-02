@@ -1,0 +1,30 @@
+<section class="h-[91vh] flex justify-between items-center flex-col">
+    <div></div>
+    <div class="flex justify-center items-center flex-col max-w-[1200px] ">
+
+        {{ if subtitle && dir == "top"}}
+        <p class="text-2xl font-medium  text-center {{ segment_1 == 'contact' ? 'text-gray-400' : 'text-gray-500' }}">
+            {{ subtitle }}
+        </p>
+        {{ /if }}
+
+        <h1
+            class="text-[{{ fontSize || '150px' }}] font-semibold text-center leading-52 {{ segment_1 == 'contact' ? 'text-white' : 'text-black' }}">
+
+            {{ heading || 'Default Heading' }}
+        </h1>
+        <div class="flex flex-col">
+            {{ if subtitle && (dir == "bottom" || !dir) }}
+            <p
+                class="text-2xl font-medium max-w-[400px] text-center {{ segment_1 == 'contact' ? 'text-gray-400' : 'text-gray-500' }}">
+                {{ subtitle }}
+            </p>
+            {{ /if }}
+        </div>
+    </div>
+
+    <div
+        class="flex justify-between items-center w-full p-4 {{ segment_1 == 'contact' ? 'text-white' : 'text-black' }}">
+
+    </div>
+</section>

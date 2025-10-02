@@ -1,0 +1,113 @@
+{{# Hero Section #}}
+<section>
+    {{ partial:components/section/hero-section
+    heading="Let's Create Something better"
+    subtitle="Together, we can create a real difference"
+    fontSize="120px"
+    show_recent_project="false"
+    }}
+</section>
+
+{{# Map Section #}}
+<section class="px-[100px] py-12 my-[200px]">
+    <div class="h-[600px] border rounded-md"></div>
+</section>
+
+{{# Contact Form Section #}}
+<section class="w-full min-h-[400px] flex justify-center items-center flex-col gap-4 p-4 max-w-[800px] mx-auto">
+    <h1 class="text-[100px] font-semibold">Lets Talk</h1>
+
+    <div class="w-full ">
+        {{ form:contact }}
+        {{# Success Message #}}
+        {{ if success }}
+        <div>
+            {{ success }}
+        </div>
+        {{ else }}
+        {{# Error Messages #}}
+        {{ if errors }}
+        <div class="bg-red-300 text-white p-2">
+            {{ errors }}
+            {{ value }}<br>
+            {{ /errors }}
+        </div>
+        {{ /if }}
+
+        {{# First Two Fields - Grid Layout #}}
+        <div class="grid grid-cols-2 gap-2 mb-24">
+            {{ fields }}
+            {{ if index < 2 }} <div class="p-2">
+                <label class="block mb-2 text-xl font-medium">{{ display }}</label>
+                <input name="{{ handle }}" class="border-b w-full focus:outline-0" />
+                {{ if error }}
+                <p class="text-gray-500">{{ error }}</p>
+                {{ /if }}
+        </div>
+        {{ /if }}
+        {{ /fields }}
+    </div>
+
+    {{# Remaining Fields - Column Layout #}}
+    <div class="flex flex-col gap-2">
+        {{ fields }}
+        {{ if index >= 2 }}
+        <div class="p-2">
+            <label class="block mb-2 text-xl font-medium">{{ display }}</label>
+            <input name="{{ handle }}" class="border-b  w-full focus:outline-0" />
+            {{ if error }}
+            <p class="text-gray-500">{{ error }}</p>
+            {{ /if }}
+        </div>
+        {{ /if }}
+        {{ /fields }}
+    </div>
+
+    {{# Honeypot Protection #}}
+    <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}">
+
+    {{# Submit Button #}}
+    <div class="w-full  flex justify-center items-center p-4 mt-12">
+        {{ partial:components/buttons/submit-button label="Send Email" }}
+    </div>
+    {{ /if }}
+    {{ /form:contact }}
+    </div>
+</section>
+
+<section class="max-w-[800px] mx-auto py-12">
+    <div class="grid grid-cols-3 gap-4">
+        <div class="flex justify-center items-center flex-col gap-4">
+            <i data-lucide="mail" class="w-12 h-12"></i>
+            <div class="flex flex-col justify-center items-center gap-2">
+                <span class="font-semibold">criztiandev@gmail.com</span>
+                <span class="text-gray-300">Email</span>
+            </div>
+        </div>
+        <div class="flex justify-center items-center flex-col gap-4">
+            <i data-lucide="phone" class="w-12 h-12"></i>
+            <div class="flex flex-col justify-center items-center gap-2">
+                <span class="font-semibold">+1 234 567 890</span>
+                <span class="text-gray-300">Phone</span>
+            </div>
+        </div>
+        <div class="flex justify-center items-center flex-col gap-4">
+            <i data-lucide="map-pin" class="w-12 h-12"></i>
+            <div class="flex flex-col justify-center items-center gap-2">
+                <span class="font-semibold">Your Location</span>
+                <span class="text-gray-300">Address</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    {{ partial:components/section/footer-section
+    heading="criztiandev@gmail.com"
+    subtitle="Ready to work together ? Apply Now "
+    dir="top"
+    fontSize="120px"
+    show_recent_project="false"
+    }}
+</section>
