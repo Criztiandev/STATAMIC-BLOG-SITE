@@ -1,0 +1,7 @@
+title: Recognitions
+fields:
+  -
+    handle: recognition
+    field:
+      type: text
+      display: Recognition

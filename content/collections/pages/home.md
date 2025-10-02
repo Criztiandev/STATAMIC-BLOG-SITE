@@ -9,8 +9,12 @@ jumbotron_button_text: 'Get Started'
 jumbotron_button_link: google
 author: 6bf600cc-d3af-47af-acec-186dd6738b62
 updated_by: 6bf600cc-d3af-47af-acec-186dd6738b62
-updated_at: 1759054799
+updated_at: 1759434300
 template_field: default
+recognition: |-
+  Won Arweave Hackton
+  23 Place in Bolt.hackton
+  Best in Capstone
 ---
 ## Welcome to your brand new Statamic site!
 

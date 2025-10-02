@@ -7,6 +7,7 @@ import { initProjectsAnimation } from "./animations/projects-section.animation";
 import { initContentAnimation } from "./animations/content-section.animation";
 import { initRecognitionAnimation } from "./animations/recognition-section.animation";
 import { initServicesAnimation } from "./animations/services-section.animation";
+import { initAwardsAnimation } from "./animations/awards-section.animation";
 import { initDecryptedText } from "./animations/decrypted-text";
 
 // Initialize Lucide icons
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initContentAnimation();
     initRecognitionAnimation();
     initServicesAnimation();
+    initAwardsAnimation();
     initGsapAnimations();
 
     initDecryptedText("[data-decrypt]", {

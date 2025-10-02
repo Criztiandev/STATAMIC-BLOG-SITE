@@ -19,6 +19,11 @@ tabs:
               display: Template
               localizable: true
               folder: page
+          -
+            handle: recognition
+            field:
+              type: markdown
+              display: Recognition
   sidebar:
     display: Sidebar
     sections:
