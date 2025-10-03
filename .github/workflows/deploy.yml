@@ -45,7 +45,7 @@ jobs:
       - name: Generate static site
         run: |
           mkdir -p storage/app/static
-          php please ssg:generate --workers=4
+          php please ssg:generate
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
