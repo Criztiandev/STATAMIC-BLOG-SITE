@@ -5,20 +5,25 @@
 
 {{ collection:projects :where="slug:not_in:projects" as="projects_list" }}
 {{ if projects_list | length > 0 }}
-<div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+<div id="project-container"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
     {{ projects_list limit="9" }}
     <a href="{{ project_url }}" class="project-item flex flex-col gap-2 cursor-pointer group">
-        <div class="w-full h-[300px] rounded-md overflow-hidden">
+        <div class="w-full h-[200px] sm:h-[250px] md:h-[300px] rounded-md overflow-hidden bg-gray-200">
             {{ if thumbnail }}
-            <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover rounded-md" />
+            {{ thumbnail }}
+            <img src="{{ url }}" alt="{{ title }}"
+                class="w-full h-full object-cover rounded-md transition-transform duration-300 group-hover:scale-105" />
+            {{ /thumbnail }}
             {{ else }}
-            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
-                <span class="text-gray-400">No Image</span>
+            <div class="w-full h-full flex items-center justify-center">
+                <span class="text-gray-400 text-sm">No Image</span>
             </div>
             {{ /if }}
         </div>
-        <h2 class="project-title text-xl font-semibold">{{ title }}</h2>
-        <p class="project-description text-sm text-gray-600">{{ content | truncate:150:... }}</p>
+        <h2 class="project-title text-lg sm:text-xl font-semibold line-clamp-2">{{ title }}</h2>
+        <p class="project-description text-xs sm:text-sm text-gray-600 line-clamp-3">{{ content | truncate:150:... }}
+        </p>
     </a>
     {{ /projects_list }}
 </div>

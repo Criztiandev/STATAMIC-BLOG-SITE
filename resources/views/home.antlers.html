@@ -4,85 +4,147 @@ subtitle="Transforming ideas into exceptional digital experiences"
 show_recent_project="true"
 }}
 
-<section id="projects-section" class="bg-white p-4">
-    <div class="h-[500px] flex gap-4">
+{{# Projects Section - Tailwind Responsive #}}
+<section id="projects-section" class="bg-white p-4 sm:p-6 md:p-8 lg:p-12">
+    <div class="h-auto min-h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] flex flex-col sm:flex-row gap-3 sm:gap-4">
         {{ collection:projects :where="slug:not_in:project" limit="3" sort="date:desc" show_future="true" }}
         <div
-            class="project-item relative overflow-hidden cursor-pointer {{ if index == 0 }}flex-[2] order-2{{ elseif index == 1 }}flex-1 order-1{{ else }}flex-1 order-3{{ /if }}">
+            class="project-item relative overflow-hidden cursor-pointer h-[250px] sm:h-full rounded-md group transition-all duration-300 hover:shadow-2xl
+            {{ if index == 0 }}sm:flex-[2] sm:order-2{{ elseif index == 1 }}sm:flex-1 sm:order-1{{ else }}sm:flex-1 sm:order-3{{ /if }}">
             <div class="overflow-hidden w-full h-full rounded-md">
-                <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover object-center" />
+                {{ thumbnail }}
+                <img src="{{ url }}" alt="{{ title }}"
+                    class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110" />
+                {{ /thumbnail }}
+            </div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             </div>
             <h2
-                class="project-title absolute bottom-4 left-4 text-lg pointer-events-none bg-gray-100 px-4 py-2 rounded-md">
-                {{
-                title }} - {{ date }}</h2>
+                class="project-title absolute bottom-2 left-2 sm:bottom-4 sm:left-4 text-xs sm:text-sm md:text-base lg:text-lg pointer-events-none bg-white/90 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-2 md:px-4 rounded-md shadow-lg font-medium">
+                {{ title }}
+            </h2>
         </div>
         {{ /collection:projects }}
     </div>
 </section>
 
-<section id="recognition-section" class="flex flex-col gap-4 bg-white justify-center items-center h-screen">
-    <span id="recognition-title" class="text-2xl">Achievements & Recognition</span>
-    <div id="recognition-text-container" class="flex flex-col items-center text-center">
-        <span class=" text-[84px] leading-[1.2] font-medium">Throughout my</span>
-        <span class="recognition-line text-[84px] leading-[1.2] font-medium">journey</span>
-        <span class="recognition-line text-[84px] leading-[1.2] font-medium">I've been</span>
-        <span class="recognition-line text-[84px] leading-[1.2] font-medium">privileged to</span>
-        <span class="recognition-line text-[84px] leading-[1.2] font-medium">earn these</span>
-        <span class="recognition-line text-[84px] leading-[1.2] font-medium">recognitions</span>
+{{# Recognition Section - Tailwind Responsive #}}
+<section id="recognition-section"
+    class="flex flex-col gap-3 sm:gap-4 md:gap-6 bg-white justify-center items-center min-h-screen py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8">
+    <span id="recognition-title"
+        class="text-2xl sm:text-2xl md:text-2xl lg:text-2xl xl:text-2xl font-semibold text-gray-700">Achievements &
+        Recognition</span>
+    <div id="recognition-text-container" class="flex flex-col items-center text-center gap-1 sm:gap-2">
+        <span
+            class="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">Throughout
+            my</span>
+        <span
+            class="recognition-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">journey</span>
+        <span
+            class="recognition-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">I've
+            been</span>
+        <span
+            class="recognition-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">privileged
+            to</span>
+        <span
+            class="recognition-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">earn
+            these</span>
+        <span
+            class="recognition-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[1.1] font-semibold">recognitions</span>
     </div>
 </section>
 
-<section id="awards-section">
-    <div class="award-row flex justify-between items-center px-8 py-6 border-t border-b">
-        <a href="https://devpost.com/software/dumpet">Bolt.new</a>
-        <span>Top 23 Entry Bolt Hackton</span>
-        <span>2024</span>
+{{# Awards Section - Tailwind Responsive #}}
+<section id="awards-section" class="bg-gray-50">
+    <div
+        class="award-row flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 px-6 sm:px-8 md:px-10 lg:px-12 py-6 sm:py-7 md:py-8 border-t border-b border-gray-200 hover:bg-white transition-colors duration-200">
+        <a href="https://devpost.com/software/dumpet"
+            class="text-2xl sm:text-2xl md:text-2xl lg:text-xl xl:text-xl font-semibold text-blue-600 hover:text-blue-800 hover:underline transition-colors">Bolt.new</a>
+        <span class="text-xl sm:text-xl md:text-xl lg:text-lg xl:text-lg text-gray-700 font-semibold">Top 23 Entry Bolt
+            Hackton</span>
+        <span
+            class="text-lg sm:text-lg md:text-lg lg:text-base xl:text-base text-gray-500 font-semibold font-mono">2024</span>
     </div>
-    <div class="award-row flex justify-between items-center px-8 py-6 border-b">
-        <a href="https://devpost.com/software/dumpet">Arweave Bounty Hackton</a>
-        <span>Won Bounty Arweave Hackton | Everlink</span>
-        <span>2024</span>
+    <div
+        class="award-row flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 px-6 sm:px-8 md:px-10 lg:px-12 py-6 sm:py-7 md:py-8 border-b border-gray-200 hover:bg-white transition-colors duration-200">
+        <a href="https://devpost.com/software/dumpet"
+            class="text-2xl sm:text-2xl md:text-2xl lg:text-xl xl:text-xl font-semibold text-blue-600 hover:text-blue-800 hover:underline transition-colors">Arweave
+            Bounty</a>
+        <span class="text-xl sm:text-xl md:text-xl lg:text-lg xl:text-lg text-gray-700 font-semibold">Won Bounty Arweave
+            Hackton |
+            Everlink</span>
+        <span
+            class="text-lg sm:text-lg md:text-lg lg:text-base xl:text-base text-gray-500 font-semibold font-mono">2024</span>
     </div>
-    <div class="award-row flex justify-between items-center px-8 py-6 border-b">
-        <a href="https://devpost.com/software/dumpet">Arweave Hackton</a>
-        <span>Won Arweave Hackton | Dumpet</span>
-        <span>2024</span>
+    <div
+        class="award-row flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 px-6 sm:px-8 md:px-10 lg:px-12 py-6 sm:py-7 md:py-8 border-b border-gray-200 hover:bg-white transition-colors duration-200">
+        <a href="https://devpost.com/software/dumpet"
+            class="text-2xl sm:text-2xl md:text-2xl lg:text-xl xl:text-xl font-semibold text-blue-600 hover:text-blue-800 hover:underline transition-colors">Arweave
+            Hackton</a>
+        <span class="text-xl sm:text-xl md:text-xl lg:text-lg xl:text-lg text-gray-700 font-semibold">Won Arweave
+            Hackton | Dumpet</span>
+        <span
+            class="text-lg sm:text-lg md:text-lg lg:text-base xl:text-base text-gray-500 font-semibold font-mono">2024</span>
     </div>
-    <div class="award-row flex justify-between items-center px-8 py-6  border-b">
-        <span>DEBESMSCAT</span>
-        <span>Best in Software</span>
-        <span>2023</span>
+    <div
+        class="award-row flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 px-6 sm:px-8 md:px-10 lg:px-12 py-6 sm:py-7 md:py-8 border-b border-gray-200 hover:bg-white transition-colors duration-200">
+        <span
+            class="text-2xl sm:text-2xl md:text-2xl lg:text-xl xl:text-xl font-semibold text-gray-900">DEBESMSCAT</span>
+        <span class="text-xl sm:text-xl md:text-xl lg:text-lg xl:text-lg text-gray-700 font-semibold">Best in
+            Software</span>
+        <span
+            class="text-lg sm:text-lg md:text-lg lg:text-base xl:text-base text-gray-500 font-semibold font-mono">2023</span>
     </div>
 </section>
 
-<section id="services-section" class="flex flex-col gap-4 bg-white justify-center items-center h-screen">
-    <span class="text-2xl">You need it ? I do it</span>
-    <div class="flex flex-col items-center text-center gap-4">
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Web Design</span>
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Web Apps</span>
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Mobile Apps</span>
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Desktop Apps</span>
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Games 2D/3D</span>
-        <span class="service-line text-[84px] leading-[1.2] font-medium cursor-pointer">Block chain</span>
+{{# Services Section - Tailwind Responsive #}}
+<section id="services-section"
+    class="flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-10 bg-white justify-center items-center min-h-screen py-8 sm:py-12 md:py-16 px-4 sm:px-6">
+    <span class="text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700">You need it ? I do it</span>
+    <div class="flex flex-col items-center text-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-5x xl:text-5x 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Web
+            Design</span>
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Web
+            Apps</span>
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Mobile
+            Apps</span>
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Desktop
+            Apps</span>
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Games
+            2D/3D</span>
+        <span
+            class="service-line text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-[5rem] leading-[1.05] sm:leading-[1.1] font-semibold cursor-pointer hover:text-blue-600 transition-colors duration-300">Block
+            chain</span>
     </div>
 </section>
 
-<section class="h-screen justify-center items-center flex bg-white flex-col">
-    <div class="flex justify-center items-center flex-col gap-4 gsap-fade-in">
-        <span class="text-2xl">Explore More of My Work</span>
+{{# Final CTA Section - Tailwind Responsive #}}
+<section class="min-h-screen justify-center items-center flex bg-white flex-col py-8 sm:py-12 md:py-16 px-4 sm:px-6">
+    <div class="flex justify-center items-center flex-col gap-4 sm:gap-6 md:gap-8 gsap-fade-in">
+        <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-semibold">Explore More of My
+            Work</span>
         {{ partial:components/buttons/primary-button label="Lets talk" }}
     </div>
 
-    <div class="flex justify-center items-center flex-col mt-[100px] gap-12">
+    <div
+        class="flex justify-center items-center flex-col mt-12 sm:mt-16 md:mt-20 lg:mt-24 xl:mt-32 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
         <div class="flex flex-col justify-center items-center gsap-fade-in">
-            <h1 class="text-[120px] h-[150px] font-semibold cursor-default" data-decrypt>Innovative</h1>
-            <h1 class="text-[120px] h-[150px] font-semibold" data-decrypt>Developer</h1>
+            <h1 class="text-6xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-[7rem] h-auto font-semibold cursor-default text-center"
+                data-decrypt>Innovative</h1>
+            <h1 class="text-6xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-[7rem] h-auto font-semibold text-center"
+                data-decrypt>Developer</h1>
         </div>
-        <div class="flex flex-col gsap-fade-in">
-            <p class="text-xl font-medium max-w-xl text-center text-gray-500" data-decrypt>I'm driven by the desire to</p>
-            <p class="text-xl font-medium max-w-xl text-center text-gray-500" data-decrypt>craft exceptional digital experiences
-            </p>
+        <div class="flex flex-col gsap-fade-in px-4 sm:px-6">
+            <p class="text-lg sm:text-xl md:text-2xl lg:text-2xl font-medium max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl text-center text-gray-500"
+                data-decrypt>I'm driven by the desire to</p>
+            <p class="text-lg sm:text-xl md:text-2xl lg:text-2xl font-medium max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl text-center text-gray-500"
+                data-decrypt>craft exceptional digital experiences</p>
         </div>
     </div>
 </section>

@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
     });
 
+    initMobileMenu();
     initHeroAnimation();
     initScrollAnimations();
     initProjectsAnimation();
@@ -65,6 +66,20 @@ document.addEventListener("DOMContentLoaded", () => {
         animateOn: "hover",
     });
 });
+
+// Mobile menu toggle
+function initMobileMenu() {
+    const toggleButton = document.querySelector('[data-collapse-toggle]');
+    const menu = document.getElementById('navbar-solid-bg');
+
+    if (toggleButton && menu) {
+        toggleButton.addEventListener('click', () => {
+            const isHidden = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden');
+            toggleButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        });
+    }
+}
 
 function initGsapAnimations() {
     // Generic animations for other sections (not hero)
