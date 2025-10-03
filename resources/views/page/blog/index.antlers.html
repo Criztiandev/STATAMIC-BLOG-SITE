@@ -1,17 +1,18 @@
 <section>
-    {{ partial:components/section/hero-section heading="Blogs" subtitle="Thoughts, tutorials, and insights on web development" show_recent_project="false" }}
+    {{ partial:components/section/hero-section heading="Blogs" subtitle="Thoughts, tutorials, and insights on web
+    development" show_recent_project="false" }}
 </section>
 
-{{ collection:blogs :where="slug:not_in:blogs" as="blogs_list" }}
+{{ collection:blogs as="blogs_list" }}
 {{ if blogs_list | length > 0 }}
 <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-    {{ blogs_list limit="9" }}
+    {{ blogs_list limit="9" where="is_published:is:true" }}
     <a href="{{ url }}" class="blog-item flex flex-col gap-2 cursor-pointer group">
         <div class="w-full h-[300px] rounded-md overflow-hidden">
-            <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover rounded-md" />
+            <img src="{{ thumbnail }}" alt="{{ title }}" class="w-full h-full object-cover rounded-md" />
         </div>
         <h2 class="blog-title text-xl font-semibold">{{ title }}</h2>
-        <p class="blog-description text-sm text-gray-600">{{ content | truncate:150:... }}</p>
+        <p class="blog-description text-sm text-gray-600">{{ excerpt | truncate:150:... }}</p>
     </a>
     {{ /blogs_list }}
 </div>
@@ -22,7 +23,7 @@
 {{ /if }}
 {{ /collection:blogs }}
 
-{{ collection:blogs :where="slug:isnt:blogs" as="all_blogs" }}
+{{ collection:blogs where="is_published:is:true" as="all_blogs" }}
 {{ if all_blogs | length > 9 }}
 <div class="text-center p-4">
     <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

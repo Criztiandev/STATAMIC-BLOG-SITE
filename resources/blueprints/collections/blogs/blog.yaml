@@ -13,6 +13,13 @@ tabs:
               validate:
                 - required
           -
+            handle: excerpt
+            field:
+              type: textarea
+              display: Excerpt
+              instructions: 'Short summary of the blog post (recommended 150-200 characters)'
+              character_limit: 250
+          -
             handle: thumbnail
             field:
               max_files: 1
@@ -40,6 +47,77 @@ tabs:
               type: template
               display: Template
               localizable: true
+  taxonomy:
+    display: 'Taxonomy & Organization'
+    sections:
+      -
+        display: Categories & Tags
+        fields:
+          -
+            handle: categories
+            field:
+              type: terms
+              taxonomies:
+                - categories
+              display: Categories
+              mode: select
+              max_items: 1
+          -
+            handle: tags
+            field:
+              type: terms
+              taxonomies:
+                - tags
+              display: Tags
+              mode: select
+      -
+        display: 'Related Content'
+        fields:
+          -
+            handle: related_posts
+            field:
+              type: entries
+              collections:
+                - blogs
+              display: 'Related Posts'
+              instructions: 'Select up to 3 related blog posts'
+              max_items: 3
+  seo:
+    display: SEO
+    sections:
+      -
+        display: 'Meta Information'
+        fields:
+          -
+            handle: meta_description
+            field:
+              type: textarea
+              display: 'Meta Description'
+              instructions: 'SEO description (recommended 150-155 characters). Falls back to excerpt if empty.'
+              character_limit: 160
+          -
+            handle: focus_keyword
+            field:
+              type: text
+              display: 'Focus Keyword'
+              instructions: 'Main keyword for SEO optimization (optional)'
+          -
+            handle: meta_keywords
+            field:
+              type: taggable
+              display: 'Meta Keywords'
+              instructions: 'Comma-separated keywords for SEO'
+      -
+        display: 'Social Sharing'
+        fields:
+          -
+            handle: og_image
+            field:
+              type: assets
+              container: assets
+              max_files: 1
+              display: 'Open Graph Image'
+              instructions: 'Custom image for social media sharing. Falls back to thumbnail if empty.'
   sidebar:
     display: Sidebar
     sections:
@@ -60,6 +138,35 @@ tabs:
               validate:
                 - required
           -
+            handle: reading_time
+            field:
+              type: integer
+              display: 'Reading Time'
+              instructions: 'Estimated reading time in minutes'
+              default: 5
+              min: 1
+          -
+            handle: is_featured
+            field:
+              type: toggle
+              display: 'Featured Post'
+              instructions: 'Highlight this post as featured'
+              default: false
+          -
+            handle: is_published
+            field:
+              type: toggle
+              display: Published
+              instructions: 'Control post visibility'
+              default: true
+          -
+            handle: enable_comments
+            field:
+              type: toggle
+              display: 'Enable Comments'
+              instructions: 'Allow comments on this post'
+              default: true
+          -
             handle: parent
             field:
               type: entries
@@ -68,8 +175,3 @@ tabs:
               max_items: 1
               listable: false
               localizable: true
-  new_tab:
-    display: 'New Tab'
-    sections:
-      -
-        display: 'New Section'

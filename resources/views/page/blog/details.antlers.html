@@ -1,24 +1,98 @@
-<section class="max-w-[800px] mx-auto">
-    <article class=" prose prose-lg flex flex-col  justify-center items-center mt-[150px]">
-        <div class="flex flex-col justify-center items-center">
-            <h1>
+<section class="max-w-[800px] mx-auto px-4">
+    <article class="flex flex-col mt-[150px] mb-[100px]">
+        {{# Header Section #}}
+        <div class="flex flex-col gap-4 mb-8">
+            <h1 class="text-4xl font-bold">
                 {{ title }}
             </h1>
 
-            <div class="flex gap-4">
-                <time>{{ date }}</time>
+            {{# Meta Information #}}
+            <div class="flex gap-4 items-center text-gray-500 text-sm">
+                <time>{{ date format="F j, Y" }}</time>
                 <span>|</span>
-                <span>{{ author:name}}</span>
+                <span>{{ author:name }}</span>
+                {{ if reading_time }}
+                <span>|</span>
+                <span>{{ reading_time }} min read</span>
+                {{ /if }}
             </div>
 
+            {{# Categories & Tags #}}
+            <div class="flex gap-4 items-center flex-wrap">
+                {{ if categories }}
+                <div class="flex gap-2 items-center">
+                    <span class="text-xs text-gray-400">Category:</span>
+                    {{ categories }}
+                    <a href="/blogs?category={{ slug }}"
+                        class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium hover:bg-blue-200">
+                        {{ title }}
+                    </a>
+                    {{ /categories }}
+                </div>
+                {{ /if }}
+
+                {{ if tags }}
+                <div class="flex gap-2 items-center flex-wrap">
+                    <span class="text-xs text-gray-400">Tags:</span>
+                    {{ tags }}
+                    <a href="/blogs?tag={{ slug }}"
+                        class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs hover:bg-gray-200">
+                        {{ title }}
+                    </a>
+                    {{ /tags }}
+                </div>
+                {{ /if }}
+            </div>
         </div>
 
-        <div class="w-full rounded-md overflow-hidden">
-            <img src="{{ thumbnail }}" class="w-full rounded-md" />
+        {{# Featured Image #}}
+        <div class="w-full rounded-md overflow-hidden mb-8">
+            <img src="{{ thumbnail }}" alt="{{ title }}" class="w-full rounded-md" />
         </div>
 
-        <div class="max-w-none blog-content">
+        {{# Main Content #}}
+        <div class="max-w-none blog-content w-full">
             {{ content }}
         </div>
+
+        {{# Related Posts Section #}}
+        {{ if related_posts }}
+        <div class="w-full mt-16 pt-8 border-t">
+            <h3 class="text-2xl font-semibold mb-6">Related Posts</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{ related_posts }}
+                <a href="{{ url }}" class="flex flex-col gap-2 hover:opacity-70 transition-opacity">
+                    <div class="w-full h-[150px] rounded-md overflow-hidden">
+                        <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover" />
+                    </div>
+                    <h4 class="text-sm font-semibold">{{ title }}</h4>
+                    <p class="text-xs text-gray-600">{{ excerpt | truncate:80 }}</p>
+                </a>
+                {{ /related_posts }}
+            </div>
+        </div>
+        {{ /if }}
+
+        {{# Comments Section Placeholder #}}
+        {{ if enable_comments }}
+        <div class="w-full mt-16 pt-8 border-t">
+            <h3 class="text-2xl font-semibold mb-6">Comments</h3>
+            <p class="text-gray-500 italic">Comments section coming soon...</p>
+            {{# TODO: Add Disqus, Commento, or other comment system here #}}
+        </div>
+        {{ /if }}
     </article>
 </section>
+
+{{# SEO Meta Tags (should be in head, but showing structure) #}}
+{{# You'll want to add these to your layout.antlers.html in the
+
+<head> section #}}
+    {{#
+    <meta name="description" content="{{ meta_description ?? excerpt }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ meta_description ?? excerpt }}">
+    <meta property="og:image" content="{{ og_image:0:url ?? thumbnail:0:url }}">
+    <meta property="og:type" content="article">
+    #}}
