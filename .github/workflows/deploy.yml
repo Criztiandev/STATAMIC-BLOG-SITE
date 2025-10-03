@@ -24,13 +24,15 @@ jobs:
           extensions: mbstring, xml, zip, gd, curl, tokenizer, dom
           coverage: none
 
-      - name: Install Composer dependencies
-        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
-
       - name: Setup environment
         run: |
           cp .env.example .env
+          echo "APP_URL=https://criztian.vercel.app" >> .env
+          echo "ASSET_URL=https://criztian.vercel.app" >> .env
           php artisan key:generate --force
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
 
       - name: Build frontend assets
         run: |
