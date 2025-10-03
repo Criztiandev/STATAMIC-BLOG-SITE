@@ -59,13 +59,9 @@ return [
 
     'copy' => [
         public_path('build') => 'build',
-        public_path('css') => 'css',
-        public_path('js') => 'js',
-        public_path('images') => 'images',
         public_path('assets') => 'assets',
         public_path('favicon.ico') => 'favicon.ico',
         public_path('robots.txt') => 'robots.txt',
-        // Add other public files/directories as needed
     ],
 
     /*
