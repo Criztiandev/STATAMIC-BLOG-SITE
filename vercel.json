@@ -1,6 +1,5 @@
 {
-  "buildCommand": "chmod +x build.sh && ./build.sh",
-  "outputDirectory": "storage/app/static",
-  "installCommand": "echo 'Skipping install - dependencies handled in build.sh'",
-  "framework": null
+  "github": {
+    "enabled": false
+  }
 }
