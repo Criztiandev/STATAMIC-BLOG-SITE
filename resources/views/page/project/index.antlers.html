@@ -1,14 +1,21 @@
 <section>
-    {{ partial:components/section/hero-section heading="Projects" subtitle="A collection of projects I've built and contributed to" show_recent_project="false" }}
+    {{ partial:components/section/hero-section heading="Projects" subtitle="A collection of projects I've built and
+    contributed to" show_recent_project="false" }}
 </section>
 
 {{ collection:projects :where="slug:not_in:projects" as="projects_list" }}
 {{ if projects_list | length > 0 }}
 <div id="project-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
     {{ projects_list limit="9" }}
-    <a href="{{ url }}" class="project-item flex flex-col gap-2 cursor-pointer group">
+    <a href="{{ project_url }}" class="project-item flex flex-col gap-2 cursor-pointer group">
         <div class="w-full h-[300px] rounded-md overflow-hidden">
+            {{ if thumbnail }}
             <img src="{{ thumbnail:0:url }}" alt="{{ title }}" class="w-full h-full object-cover rounded-md" />
+            {{ else }}
+            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                <span class="text-gray-400">No Image</span>
+            </div>
+            {{ /if }}
         </div>
         <h2 class="project-title text-xl font-semibold">{{ title }}</h2>
         <p class="project-description text-sm text-gray-600">{{ content | truncate:150:... }}</p>

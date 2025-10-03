@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(composer:*)",
+      "Bash(where composer)",
+      "Bash(C:Userscrizt.configherdbincomposer.bat require statamic/ssg)"
     ],
     "deny": [],
     "ask": []

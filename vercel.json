@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "build.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "storage/app/static"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/storage/app/static/$1"
+    }
+  ],
+  "buildCommand": "chmod +x build.sh && ./build.sh",
+  "outputDirectory": "storage/app/static",
+  "framework": null,
+  "installCommand": "echo 'Dependencies installed in build.sh'"
+}

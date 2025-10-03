@@ -19,10 +19,11 @@ tabs:
               type: assets
               display: Thumbnail
           -
-            handle: url
+            handle: project_url
             field:
               type: text
-              display: URL
+              display: 'Project URL'
+              instructions: 'External URL to the live project website'
           -
             handle: content
             field:
